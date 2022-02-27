@@ -1,3 +1,4 @@
 Mixing/
+__pycache__/
 *.wav
 *.mp3
