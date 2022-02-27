@@ -62,14 +62,18 @@ class Immerser:
     def play(self):
         pygame.init()
         pygame.mixer.init()
-        self.sound_main = pygame.mixer.Sound(self.main_music_loc)
-        self.sound_intense = pygame.mixer.Sound(self.intense_music_loc)
-        self.sound_intense.set_volume(0)
-        self.sound_main.play(-1)
+        self.sound_main = pygame.mixer.Sound(self.main_music_loc)           # Setup the main audio clip
+        self.sound_intense = pygame.mixer.Sound(self.intense_music_loc)     # Setup the intense audio clip
+        self.sound_intense.set_volume(0)                                    # Set insense audio volume to zero
+
+        # Play both audios
+        self.sound_main.play(-1)                                            
         self.sound_intense.play(-1)
 
+        # Start music mixer thread
         threading.Thread(target=self.adaptMusic).start()
 
+        # Start keyboard listener thread
         hookManager = pyHook.HookManager()
         hookManager.KeyUp = self.OnKeyEvent
         hookManager.HookKeyboard()
